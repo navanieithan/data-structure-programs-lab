@@ -1,0 +1,17 @@
+#include <stdio.h>
+#include <ctype.h>
+char s[50]; int t=-1;
+void push(char x){ s[++t]=x; }
+char pop(){ return s[t--]; }
+int p(char x){ return (x=='+'||x=='-')?1:(x=='*'||x=='/')?2:0; }
+int main(){
+    char e[50]; scanf("%s",e);
+    for(int i=0;e[i];i++){
+        char c=e[i];
+        if(isalnum(c)) printf("%c",c);
+        else if(c=='(') push(c);
+        else if(c==')'){ while(s[t]!='(') printf("%c",pop()); pop(); }
+        else{ while(t!=-1 && p(s[t])>=p(c)) printf("%c",pop()); push(c); }
+    }
+    while(t!=-1) printf("%c",pop());
+}
