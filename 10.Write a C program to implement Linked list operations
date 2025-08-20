@@ -1,0 +1,13 @@
+#include <stdio.h>
+#include <stdlib.h>
+struct Node{int d;struct Node*n;}*h=NULL;
+void ins(int x){
+    struct Node*t=malloc(sizeof(struct Node));
+    t->d=x; t->n=h; h=t;
+}
+void del(){ if(h){struct Node*t=h;h=h->n;free(t);} }
+void dis(){struct Node*t=h;while(t){printf("%d ",t->d);t=t->n;}printf("\n");}
+int main(){
+    ins(10);ins(20);ins(30);
+    dis(); del(); dis();
+}
